@@ -22,12 +22,6 @@ export default function Index() {
         searchtext.endsWith(".org"))
     ) {
       setWebUrl(`${searchtext}`);
-    } else if (
-      searchtext.endsWith(".com") ||
-      searchtext.endsWith(".in") ||
-      searchtext.endsWith(".org")
-    ) {
-      setWebUrl(`http://${searchtext}`);
     } else {
       setWebUrl(`https://www.google.com/search?q=${searchtext}`);
     }

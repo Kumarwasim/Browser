@@ -13,14 +13,27 @@ export default function Index() {
     setSeachtext(text);
   };
   const handleSearch = () => {
-    if (searchtext.startsWith("http://") || searchtext.startsWith("https://")) {
-      setWebUrl(searchtext);
+    if (searchtext.includes(" ")) {
+      setWebUrl(`https://www.google.com/search?q=${searchtext}`);
+    } else if (
+      (searchtext.startsWith("http://") || searchtext.startsWith("https://")) &&
+      (searchtext.endsWith(".com") ||
+        searchtext.endsWith(".in") ||
+        searchtext.endsWith(".org"))
+    ) {
+      setWebUrl(`${searchtext}`);
+    } else if (
+      searchtext.endsWith(".com") ||
+      searchtext.endsWith(".in") ||
+      searchtext.endsWith(".org")
+    ) {
+      setWebUrl(`http://${searchtext}`);
     } else {
-      setWebUrl(`https://www.google.com/search?q= + ${searchtext}`);
+      setWebUrl(`https://www.google.com/search?q=${searchtext}`);
     }
   };
   return (
-    <View>
+    <View className="">
       <View className="flex-row px-7 py-1 border border-gray-400 bg-white rounded-lg shadow-slate-600 items-center justify-center">
         <TextInput
           className="w-full outline-none"
@@ -43,6 +56,7 @@ export default function Index() {
       </View>
       <View className="h-full w-full">
         <WebView
+          className=""
           source={{ uri: webUrl }}
           onLoadProgress={({ nativeEvent }) => {
             setProgress(nativeEvent.progress);

@@ -16,13 +16,11 @@ export default function Index() {
     if (searchtext.startsWith("http://") || searchtext.startsWith("https://")) {
       setWebUrl(searchtext);
     } else {
-      setWebUrl(
-        `https://www.google.com/search?q= + ${encodeURIComponent(searchtext)}`
-      );
+      setWebUrl(`https://www.google.com/search?q= + ${searchtext}`);
     }
   };
   return (
-    <View className="flex-1">
+    <View>
       <View className="flex-row px-7 py-1 border border-gray-400 bg-white rounded-lg shadow-slate-600 items-center justify-center">
         <TextInput
           className="w-full outline-none"
